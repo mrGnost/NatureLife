@@ -1,7 +1,16 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.jetbrainsKotlinKapt)
 }
+
+// Get keystore properties for API usage
+val keystoreProperties = Properties()
+val keystorePropertiesFile = project.file("keystore.properties")
+keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
     namespace = "com.example.naturelife"
@@ -15,6 +24,16 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String",
+            "WEATHER_KEY",
+            "\"${keystoreProperties.getProperty("weatherKey")}\""
+        )
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
@@ -44,6 +63,16 @@ dependencies {
     // Navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+
+    // DI
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
+
+    // Web
+    implementation(libs.retrofit2.retrofit)
+    implementation(libs.logging.interceptor)
+    implementation(libs.converter.gson)
+
 
     // Testing
     testImplementation(libs.junit)
