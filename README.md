@@ -20,9 +20,9 @@ The player will be obtaining points for taking strolls, running and spending tim
     * [Android KTX](https://developer.android.com/kotlin/ktx) - Kotlin extensions
     * [Room](https://developer.android.com/jetpack/androidx/releases/room) - local data storage
     * [ViewBinding](https://developer.android.com/topic/libraries/view-binding) - getting links to the UI elements
+    * [WorkManager](https://developer.android.com/reference/androidx/work/WorkManager) - continuous background work
   * [Dagger 2](https://dagger.dev/) - dependency injection
   * [Retrofit](https://square.github.io/retrofit/) - interaction with server
-  * [WorkManager](https://developer.android.com/reference/androidx/work/WorkManager) - continuous background work
   * Testing
     * [JUnit5](https://junit.org/junit5/) - unit testing
     * [Espresso](https://developer.android.com/training/testing/espresso) - UI testing
