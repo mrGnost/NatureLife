@@ -4,17 +4,22 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/purityFragment">
 
+    <action
+        android:id="@+id/actionGlobalMapFragment"
+        app:destination="@id/mapFragment"
+        app:launchSingleTop="true" />
+
     <fragment
         android:id="@+id/purityFragment"
         android:name="com.example.naturelife.ui.fragments.PurityFragment"
         android:label="PurityFragment" />
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.example.naturelife.ui.fragments.MapFragment"
+        android:name="com.example.naturelife.ui.fragments.map.MapFragment"
         android:label="MapFragment" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.naturelife.ui.fragments.ProfileFragment"
+        android:name="com.example.naturelife.ui.fragments.profile.ProfileFragment"
         android:label="ProfileFragment" />
     <fragment
         android:id="@+id/settingsFragment"

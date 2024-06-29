@@ -9,6 +9,9 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        maven {
+            setUrl("https://maven.google.com/")
+        }
     }
 }
 dependencyResolutionManagement {

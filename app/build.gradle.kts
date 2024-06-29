@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.jetbrainsKotlinKapt)
+    alias(libs.plugins.hilt)
 }
 
 // Get keystore properties for API usage
@@ -14,12 +15,12 @@ keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
     namespace = "com.example.naturelife"
-    compileSdk = 34
+    compileSdk = 32
 
     defaultConfig {
         applicationId = "com.example.naturelife"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 32
         versionCode = 1
         versionName = "1.0"
 
@@ -30,10 +31,16 @@ android {
             "WEATHER_KEY",
             "\"${keystoreProperties.getProperty("weatherKey")}\""
         )
+        buildConfigField(
+            "String",
+            "MAPKIT_KEY",
+            "\"${keystoreProperties.getProperty("mapkitKey")}\""
+        )
     }
 
     buildFeatures {
         buildConfig = true
+        viewBinding = true
     }
 
     buildTypes {
@@ -65,13 +72,17 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
 
     // DI
-    implementation(libs.dagger)
-    kapt(libs.dagger.compiler)
+    implementation(libs.hilt)
+    implementation(libs.androidx.lifecycle.service)
+    kapt(libs.hilt.compiler)
 
     // Web
     implementation(libs.retrofit2.retrofit)
     implementation(libs.logging.interceptor)
     implementation(libs.converter.gson)
+
+    // Map
+    implementation(libs.yandex.mapkit)
 
     // WorkManager
     implementation(libs.androidx.work.runtime.ktx)
@@ -79,8 +90,20 @@ dependencies {
     // Preferences
     implementation(libs.androidx.preference.ktx)
 
+    // Permissions
+    implementation(libs.permissions)
+
+    // DB
+    implementation(libs.androidx.room)
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+kapt {
+    correctErrorTypes = true
 }
